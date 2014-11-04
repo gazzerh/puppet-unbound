@@ -14,7 +14,7 @@ define unbound::record (
 
   $config_file = $unbound::params::config_file
 
-  $local_data     = "  local-data: \"${entry} ${ttl} IN ${type} ${content}\"\n"
+  $local_data     = "  local-data: \'${entry} ${ttl} IN ${type} ${content}\'\n"
   $local_data_ptr = "  local-data-ptr: \"${content} ${entry}\"\n"
 
   $config = $reverse? {
