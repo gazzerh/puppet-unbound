@@ -3,7 +3,9 @@
 # Installs and configures Unbound, the caching DNS resolver from NLnet Labs
 #
 class unbound (
-  $access                       = $unbound::params::access,
+  $access_allow                 = $unbound::params::access_allow,
+  $access_refuse                = $unbound::params::access_refuse,
+  $access_deny                  = $unbound::params::access_deny,
   $anchor_file                  = $unbound::params::anchor_file,
   $chroot                       = $unbound::params::chroot,
   $conf_d                       = $unbound::params::conf_d,
@@ -110,6 +112,30 @@ class unbound (
     order   => '00',
     target  => $config_file,
     content => template('unbound/unbound.conf.erb'),
+  }
+
+  # Add ACL files. Need to clean this up. It can be done with one template but
+  # I don't have time
+  file { "$confdir/conf.d/05_access_allow.conf":
+    owner   => $owner,
+    group   => 0,
+    content => template('unbound/access_allow.conf.erb'),
+  }
+
+  if $access_refuse != '' {
+    file { "$confdir/conf.d/06_access_refuse.conf":
+      owner   => $owner,
+      group   => 0,
+      content => template('unbound/access_refuse.conf.erb'),
+    }
+  }
+
+  if $access_deny != '' {
+    file { "$confdir/conf.d/07_access_deny.conf":
+      owner   => $owner,
+      group   => 0,
+      content => template('unbound/access_deny.conf.erb'),
+    }
   }
 
   # Initialize the root key file if it doesn't already exist.

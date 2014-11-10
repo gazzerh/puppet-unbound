@@ -79,13 +79,6 @@ server:
 <% elsif @outgoing_interface -%>
   outgoing-interface: <%= @outgoing_interface %>
 <% end -%>
-<% if @access.is_a? Array -%>
-<% @access.each do |acc| -%>
-  access-control: <%= acc %> allow
-<% end -%>
-<% elsif access != '' -%>
-  access-control: <%= access %> allow
-<% end -%>
 <% if @infra_host_ttl -%>
   infra-host-ttl: <%= @infra_host_ttl %>
 <% end -%>

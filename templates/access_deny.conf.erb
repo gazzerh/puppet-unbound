@@ -1,0 +1,9 @@
+# Managed by puppet
+
+<% if @access_deny.is_a? Array -%>
+<% @access_deny.each do |ip| -%>
+  access-control: <%= ip %> deny
+<% end -%>
+<% elsif access_deny != ' ' -%>
+  access-control: <%= access_deny %> deny
+<% end -%>

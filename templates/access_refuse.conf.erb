@@ -1,0 +1,9 @@
+# Managed by puppet
+
+<% if @access_refuse.is_a? Array -%>
+<% @access_refuse.each do |ip| -%>
+  access-control: <%= ip %> refuse
+<% end -%>
+<% elsif access_refuse != ' ' -%>
+  access-control: <%= access_refuse %> refuse
+<% end -%>

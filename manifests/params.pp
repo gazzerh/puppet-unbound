@@ -76,7 +76,9 @@ class unbound::params {
     }
   }
 
-  $access                     = ['::1','127.0.0.1/8']
+  $access_allow               = ['::1','127.0.0.1/8']
+  $access_refuse              = undef
+  $access_deny                = undef
   $chroot                     = undef
   $conf_d                     = "${confdir}/conf.d"
   $config_file                = "${confdir}/unbound.conf"
